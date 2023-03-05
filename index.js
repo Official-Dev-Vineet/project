@@ -25,23 +25,53 @@ const MainContent = () => {
   const [dataReportMsg, setDataReportMsg] = React.useState(
     "Data sheet Ready to Data Post"
   );
-  React.useEffect(() => {
-    const data = () => {
-      const allInput = document.querySelectorAll("input");
-      allInput.forEach((element) => {
-        element.addEventListener("input",async() => {
-          setDataReportMsg("data inserting...");
-        });
-        const timer = setTimeout(() => {
-          setDataReportMsg("Data sheet Ready to Data Post");
-        }, 2000);
-        return () => {
-          clearTimeout(timer);
-        };
+  const [data, setData] = React.useState(null)
+  const typingChecker = () => {
+    const allInput = document.querySelectorAll("input");
+    allInput.forEach((element) => {
+      element.addEventListener("input", async () => {
+        setDataReportMsg("data inserting...");
       });
-    };
-    data();
-  });
+      const timer = setTimeout(() => {
+        setDataReportMsg("Data sheet Ready to Data Post");
+      }, 2000);
+      return () => {
+        clearTimeout(timer);
+      };
+    });
+  };
+  React.useEffect(() => {
+    typingChecker();
+    const allInput = document.querySelectorAll("tr input")
+    allInput.forEach((element, index) => {
+      element.addEventListener("keyup", (e) => {
+        if (e.keyCode == 13) {
+          allInput[index + 5].focus()
+        }
+        else if (e.keyCode == 36) {
+          allInput[0].focus()
+        }
+        else if (e.keyCode == 35) {
+          allInput[allInput.length - 1].focus()
+        }
+      })
+      element.addEventListener("blur", e => {
+        let rowName = e.currentTarget.parentElement.parentElement.querySelector("td").textContent
+        let currentInputArray = e.currentTarget.parentElement.parentElement.querySelectorAll("tr input")
+        var dataArray = [];
+        currentInputArray.forEach((element) => {
+          let dataValue = (element.value).trim()
+          dataArray.push(dataValue)
+        })
+        let rawData = {
+          month: monthDetails(date),
+          title: rowName,
+          data: dataArray
+        }
+        setData(rawData);
+      })
+    })
+  })
   const date = new Date();
   const tableData = [
     "Onboarding Call",
@@ -85,19 +115,19 @@ const MainContent = () => {
               >
                 <td>{data}</td>
                 <td>
-                  <input type="text" />
+                  <input type="text" className="input1" />
                 </td>
                 <td>
-                  <input type="text" />
+                  <input type="text" className="input2" />
                 </td>
                 <td>
-                  <input type="text" />
+                  <input type="text" className="input3" />
                 </td>
                 <td>
-                  <input type="text" />
+                  <input type="text" className="input4" />
                 </td>
                 <td>
-                  <input type="text" />
+                  <input type="text" className="input5" />
                 </td>
               </tr>
             );
