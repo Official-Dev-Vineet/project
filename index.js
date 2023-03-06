@@ -11,7 +11,7 @@ const App = () => {
 const Nav = () => {
   return (
     <nav>
-      <div className="logo">Excel</div>
+      <div className="logo">Data Sheet</div>
       <ul className="menu">
         <li>New</li>
         <li>Open</li>
@@ -54,21 +54,6 @@ const MainContent = () => {
         else if (e.keyCode == 35) {
           allInput[allInput.length - 1].focus()
         }
-      })
-      element.addEventListener("blur", e => {
-        let rowName = e.currentTarget.parentElement.parentElement.querySelector("td").textContent
-        let currentInputArray = e.currentTarget.parentElement.parentElement.querySelectorAll("tr input")
-        var dataArray = [];
-        currentInputArray.forEach((element) => {
-          let dataValue = (element.value).trim()
-          dataArray.push(dataValue)
-        })
-        let rawData = {
-          month: monthDetails(date),
-          title: rowName,
-          data: dataArray
-        }
-        setData(rawData);
       })
     })
   })
@@ -115,19 +100,19 @@ const MainContent = () => {
               >
                 <td>{data}</td>
                 <td>
-                  <input type="text" className="input1" />
+                  <input type="text" className="input1" onChange={()=>valueHandler()}/>
                 </td>
                 <td>
-                  <input type="text" className="input2" />
+                  <input type="text" className="input2" onChange={()=>valueHandler()}/>
                 </td>
                 <td>
-                  <input type="text" className="input3" />
+                  <input type="text" className="input3" onChange={()=>valueHandler()} />
                 </td>
                 <td>
-                  <input type="text" className="input4" />
+                  <input type="text" className="input4" onChange={()=>valueHandler()} />
                 </td>
                 <td>
-                  <input type="text" className="input5" />
+                  <input type="text" className="input5" onChange={()=>valueHandler()} />
                 </td>
               </tr>
             );
