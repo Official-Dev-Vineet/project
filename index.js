@@ -25,7 +25,7 @@ const MainContent = () => {
   const [dataReportMsg, setDataReportMsg] = React.useState(
     "Data sheet Ready to Data Post"
   );
-  const [data, setData] = React.useState(null)
+  const [data, setData] = React.useState(null) // data for ready to post 
   const typingChecker = () => {
     const allInput = document.querySelectorAll("input");
     allInput.forEach((element) => {
@@ -40,6 +40,18 @@ const MainContent = () => {
       };
     });
   };
+
+  function valueHandler(e) {
+    const input = e.currentTarget
+    const rowName = e.target.parentElement.parentElement.textContent
+    const index = ((input.classList[0]).slice(-1) - 1)
+    let data = {
+      title: rowName,
+      data: input.value,
+      dataIndex: index
+    }
+    setData(data)
+  }
   React.useEffect(() => {
     typingChecker();
     const allInput = document.querySelectorAll("tr input")
@@ -100,19 +112,19 @@ const MainContent = () => {
               >
                 <td>{data}</td>
                 <td>
-                  <input type="text" className="input1" onChange={()=>valueHandler()}/>
+                  <input type="text" className="input1" onChange={(e) => valueHandler(e)} />
                 </td>
                 <td>
-                  <input type="text" className="input2" onChange={()=>valueHandler()}/>
+                  <input type="text" className="input2" onChange={(e) => valueHandler(e)} />
                 </td>
                 <td>
-                  <input type="text" className="input3" onChange={()=>valueHandler()} />
+                  <input type="text" className="input3" onChange={(e) => valueHandler(e)} />
                 </td>
                 <td>
-                  <input type="text" className="input4" onChange={()=>valueHandler()} />
+                  <input type="text" className="input4" onChange={(e) => valueHandler(e)} />
                 </td>
                 <td>
-                  <input type="text" className="input5" onChange={()=>valueHandler()} />
+                  <input type="text" className="input5" onChange={(e) => valueHandler(e)} />
                 </td>
               </tr>
             );
