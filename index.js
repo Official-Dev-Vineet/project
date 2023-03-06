@@ -26,7 +26,7 @@ const MainContent = () => {
     "Data sheet Ready to Data Post"
   );
   const [data, setData] = React.useState(null) // data for ready to post 
-  const typingChecker = () => {
+   const typingChecker = () => {     //  for data inputting message 
     const allInput = document.querySelectorAll("input");
     allInput.forEach((element) => {
       element.addEventListener("input", async () => {
@@ -47,7 +47,7 @@ const MainContent = () => {
     const index = ((input.classList[0]).slice(-1) - 1)
     let data = {
       title: rowName,
-      data: input.value,
+      data: (input.value).trim(),
       dataIndex: index
     }
     setData(data)
@@ -69,7 +69,8 @@ const MainContent = () => {
       })
     })
   })
-  const date = new Date();
+
+  const date = new Date(); // get month no 
   const tableData = [
     "Onboarding Call",
     "Google Search Console Access",
