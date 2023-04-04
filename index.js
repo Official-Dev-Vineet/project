@@ -57,14 +57,18 @@ const MainContent = () => {
     const allInput = document.querySelectorAll("tr input")
     allInput.forEach((element, index) => {
       element.addEventListener("keyup", (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13 || e.keyCode == 40) {
           allInput[index + 5].focus()
+          e.currentTarget.value=eval(e.currentTarget.value)
         }
         else if (e.keyCode == 36) {
           allInput[0].focus()
         }
         else if (e.keyCode == 35) {
           allInput[allInput.length - 1].focus()
+        }
+        else if(e.keyCode == 38){
+          allInput[index-5].focus()
         }
       })
     })
